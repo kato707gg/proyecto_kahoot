@@ -29,35 +29,24 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.net.Socket;
 import java.io.DataOutputStream;
 import java.io.IOException;
+//import Cliente.UserListGUI;
 
 public class WindowNickname extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNickname;
-	private ArrayList<String> activeUsers = new ArrayList<String>();
-	private String nickname;
-    private ActiveUsersWindow activeUsersWindow;
+	public static String nickname;
+    //private UserListGUI userListGUI;
+    Client client = new Client();
 
 	public WindowNickname() {
+		//userListGUI = new UserListGUI();
 		initComponents();
 	}
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WindowStart frame = new WindowStart();
-					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	private void initComponents() {
-	    activeUsers = new ArrayList<String>();
+		
+	    new ArrayList<String>();
 	    
 		setTitle("Kahoot!");
 		setResizable(false);
@@ -215,6 +204,9 @@ public class WindowNickname extends JFrame {
 		            dispose();
 		            ActiveUsersWindow activeUsersWindow = new ActiveUsersWindow(new ArrayList<String>(Arrays.asList(ServerGUI.getActiveUsers())));
 		            activeUsersWindow.setVisible(true);
+		            setLocationRelativeTo(null);
+		            //UserListGUI usersList = new UserListGUI();
+	                //usersList.setVisible(true);
 		        } catch (IOException ex) {
 		            ex.printStackTrace();
 		        }

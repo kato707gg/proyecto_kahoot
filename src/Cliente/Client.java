@@ -1,12 +1,30 @@
 package Cliente;
 
+import java.awt.EventQueue;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import Servidor.ServerGUI;
+
 public class Client {
+	
+	public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    WindowStart frame = new WindowStart();
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+	
     private static final String SERVER_IP = "127.0.0.1";
     private static final int SERVER_PORT = 5000;
 
@@ -26,11 +44,10 @@ public class Client {
         } catch (IOException e) {
             System.err.println("Error al enviar el código al servidor: " + e.getMessage());
         }
-
         return response;
     }
 
-    public String[] obtenerListaUsuarios() {
+    /*public String[] obtenerListaUsuarios() {
         String[] listaUsuarios = new String[0];
 
         try (
@@ -53,5 +70,5 @@ public class Client {
         }
 
         return listaUsuarios;
-    }
+    }*/
 }

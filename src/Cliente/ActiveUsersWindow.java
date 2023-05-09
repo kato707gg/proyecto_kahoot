@@ -1,11 +1,7 @@
 package Cliente;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -14,32 +10,25 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JLayeredPane;
 import Servidor.ServerGUI;
 
 public class ActiveUsersWindow extends JFrame {
-
+	private ArrayList<Question> questions;
     private JPanel contentPane;
-    private JPanel usersPanel;
     
-
-    private ArrayList<String> activeUsers;
-
     public ActiveUsersWindow(List<String> activeUsers) {
-    	
     	setTitle("Kahoot!");
     	setResizable(false);
     	setLocationRelativeTo(null);
@@ -50,8 +39,6 @@ public class ActiveUsersWindow extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         
-        String[] users = activeUsers.toArray(new String[activeUsers.size()]);
-
         JLabel lblNewLabel = new JLabel("Unete al juego con el pin: 123456");
         lblNewLabel.setBackground(Color.WHITE);
         lblNewLabel.setOpaque(true);
@@ -116,6 +103,47 @@ public class ActiveUsersWindow extends JFrame {
         btnNewButton.setForeground(Color.WHITE);
         btnNewButton.setFont(new Font("Dubai", Font.BOLD, 20));
         
+        btnNewButton.addActionListener((e) -> {
+        	questions = new ArrayList<Question>();
+    	    questions.add(new Question("1. ¿Cuál de los siguientes tipos de datos de Java tiene más precisión?", 
+    	                                new String[]{"String", "int", "double", "float"}, 
+    	                                3, 100));
+    	    questions.add(new Question("2. ¿Cuál es el lenguaje que se utiliza para hacer consultas en las bases de datos", 
+    	                                new String[]{"XML", "Select", "C++", "SQL"}, 
+    	                                3, 100));
+    	    questions.add(new Question("3. Para insertar un hiperenlace en una página se utiliza la etiqueta...", 
+    	                                new String[]{"href", "a", "link", "label"}, 
+    	                                1, 100));
+    	    questions.add(new Question("4. ¿En qué directorio se encuentran los archivos de configuración de Linux?", 
+    	                                new String[]{"/etc", "/config", "/cfg", "/link"}, 
+    	                                0, 100));
+    	    questions.add(new Question("5. ¿Cuál de las siguientes memorias es volátil?", 
+    	                                new String[]{"RAM", "EPROM", "ROM", "SSD"}, 
+    	                                0, 100));
+    	    questions.add(new Question("6. ¿Cuantos bits tiene un byte?", 
+                    new String[]{"1", "2", "8", "4"}, 
+                    2, 100));
+    	    questions.add(new Question("7. ¿Cual es un IDE de programacion?", 
+                    new String[]{"Vim", "Sublime Text", "NotePad", "IntellijIDEA"}, 
+                    3, 100));
+    	    questions.add(new Question("8. Es un framework de Javascript", 
+                    new String[]{"ASP.NET", "ReactJS", "SpringBoot", "Laravel"}, 
+                    1, 100));
+    	    questions.add(new Question("9. ¿En que año se creo Java?", 
+                    new String[]{"1995", "2001", "2010", "2020"}, 
+                    0, 100));
+    	    questions.add(new Question("10. ¿Que lenguaje de programacion esta mal escrito?", 
+                    new String[]{"C++", "Piton", "C#", "Java"}, 
+                    1, 100));
+        	
+        	
+            GameWindow gameWindow = new GameWindow(questions);
+            gameWindow.setVisible(true);
+            setLocationRelativeTo(null);
+            GameManager gameManager = new GameManager(questions);
+        	gameManager.start();
+        });
+        
         int valor = ServerGUI.numUsuariosConectados;
         JLabel lblNewLabel_4 = new JLabel(Integer.toString(valor));
         lblNewLabel_4.setForeground(Color.WHITE);
@@ -127,24 +155,22 @@ public class ActiveUsersWindow extends JFrame {
         	gl_contentPane.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_contentPane.createSequentialGroup()
         			.addGap(95)
-        			.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 1045, Short.MAX_VALUE)
+        			.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 1029, Short.MAX_VALUE)
         			.addGap(100))
-        		.addGroup(gl_contentPane.createSequentialGroup()
-        			.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 1230, Short.MAX_VALUE)
-        			.addContainerGap())
         		.addGroup(gl_contentPane.createSequentialGroup()
         			.addGap(60)
         			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-        				.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 1112, Short.MAX_VALUE)
+        				.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 1096, Short.MAX_VALUE)
         				.addGroup(gl_contentPane.createSequentialGroup()
         					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-        						.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-        						.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        						.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+        						.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
         					.addGap(355)
-        					.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 195, Short.MAX_VALUE)
+        					.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 201, Short.MAX_VALUE)
         					.addGap(350)
-        					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)))
         			.addGap(68))
+        		.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 1224, Short.MAX_VALUE)
         );
         gl_contentPane.setVerticalGroup(
         	gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -173,7 +199,7 @@ public class ActiveUsersWindow extends JFrame {
     }
 
 
-    private void updateUsersPanel() {
+    /*private void updateUsersPanel() {
         usersPanel.removeAll();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -194,10 +220,10 @@ public class ActiveUsersWindow extends JFrame {
         }
         usersPanel.revalidate();
         usersPanel.repaint();
-    }
+    }*/
 
-    public void setActiveUsers(ArrayList<String> activeUsers) {
+    /*public void setActiveUsers(ArrayList<String> activeUsers) {
         this.activeUsers = activeUsers;
         updateUsersPanel();
-    }
+    }*/
 }

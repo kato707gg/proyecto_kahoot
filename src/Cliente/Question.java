@@ -2,38 +2,47 @@ package Cliente;
 
 public class Question {
     private String question;
-    private String[] options;
-    private int answerIndex;
+    private String[] answers;
+    private int correctAnswerIndex;
     private int points;
-    private int time;
 
-    public Question(String question, String[] options, int answerIndex, int points, int time) {
+    public Question(String question, String[] answers, int correctAnswerIndex, int points) {
         this.question = question;
-        this.options = options;
-        this.answerIndex = answerIndex;
+        this.answers = answers;
+        this.correctAnswerIndex = correctAnswerIndex;
         this.points = points;
-        this.time = time;
-        
     }
-    
 
     public String getQuestion() {
         return question;
     }
 
-    public String[] getOptions() {
-        return options;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public int getAnswerIndex() {
-        return answerIndex;
+    public String[] getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(String[] answers) {
+        this.answers = answers;
+    }
+
+    public int getCorrectAnswerIndex() {
+        return correctAnswerIndex;
+    }
+
+    public void setCorrectAnswerIndex(int correctAnswerIndex) {
+        this.correctAnswerIndex = correctAnswerIndex;
     }
 
     public int getPoints() {
         return points;
     }
 
-    public int getTime() {
-        return time;
+    public void setPoints(int points) {
+        this.points = points;
     }
 }
+
